@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Profile from "./pages/Profile/Profile";
+import Register from "./pages/Forms/Register";
+import SignIn from "./pages/Forms/SignIn";
+import Load from "./pages/Load/Load";
+import CreateDriver from "./pages/Driver/CreateDriver";
+import Drivers from "./pages/Driver/Drivers";
+import CreateTractor from "./pages/Tractor/CreateTractor";
+import Tractors from "./pages/Tractor/Tractors";
+import CreateTrailer from "./pages/Trailer/CreateTrailer";
+import Trailers from "./pages/Trailer/Trailers";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/pages/profile" element={<Profile />} />
+        <Route path="/pages/loads/list" element={<Load />} />
+        <Route path="/pages/drivers/create" element={<CreateDriver />} />
+        <Route path="/pages/drivers/drivers" element={<Drivers />} />
+        <Route path="/pages/tractors/create" element={<CreateTractor />} />
+        <Route path="/pages/tractors/tractors" element={<Tractors />} />
+        <Route path="/pages/trailers/create" element={<CreateTrailer />} />
+        <Route path="/pages/trailers/trailers" element={<Trailers />} />
+      </Routes>
+    </Router>
   );
 }
 
