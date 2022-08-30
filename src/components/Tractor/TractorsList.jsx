@@ -20,7 +20,6 @@ const TractorsList = () => {
   const { activeAccount, setActiveAccount } = useContext(AccountActive);
   const [data, setData] = useState([]);
 
-  
   useEffect(() => {
     const organizationId = activeAccount.account.organizationId;
     GetTractorList(organizationId).then((result) => {
@@ -29,12 +28,10 @@ const TractorsList = () => {
   }, []);
 
   const handleNavigation = (id) => {
-
     const params = {};
     const tractorId = id;
 
     params.tractorId = tractorId;
-  
 
     navigate({
       pathname: "/pages/tractors/tractors/update",
@@ -68,27 +65,23 @@ const TractorsList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.length &&
-                  data.map((row) => (
-                    <TableRow
-                      key={row.tractorId}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.vin}</TableCell>
-                      <TableCell align="right">{row.year}</TableCell>
-                      <TableCell align="right">{row.model}</TableCell>
-                      <TableCell align="right">{row.status}</TableCell>
-                      <TableCell align="right">
-                        <button
-                          onClick={()=>handleNavigation(row.id)}
-                          
-                        >
-                          Update
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                {data.map((row) => (
+                  <TableRow
+                    key={row.tractorId}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">{row.vin}</TableCell>
+                    <TableCell align="right">{row.year}</TableCell>
+                    <TableCell align="right">{row.model}</TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="right">
+                      <button onClick={() => handleNavigation(row.id)}>
+                        Update
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

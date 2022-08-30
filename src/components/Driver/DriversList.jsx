@@ -17,13 +17,10 @@ const DriversList = () => {
   const { activeAccount, setActiveAccount } = useContext(AccountActive);
   const [data, setData] = useState([]);
 
- 
-
   useEffect(() => {
     const organizationId = activeAccount.account.organizationId;
     GetDriversList(organizationId).then((result) => {
       setData(result.drivers);
-   
     });
   }, []);
 
@@ -53,24 +50,23 @@ const DriversList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.length &&
-                  data.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.mail}</TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.status}</TableCell>
-                      <TableCell align="right">
-                        <Link href="#">Update</Link>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Link href="#">View</Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                {data.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">{row.mail}</TableCell>
+                    <TableCell align="right">{row.phone}</TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="right">
+                      <Link href="#">Update</Link>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Link href="#">View</Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

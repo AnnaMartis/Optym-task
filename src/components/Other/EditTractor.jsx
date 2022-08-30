@@ -47,8 +47,7 @@ const EditTractor = () => {
     
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
-    console.log(activeAccount.account)
+
     const tractor = {
       name: data.get("name"),
       make: data.get("make"),
@@ -60,12 +59,12 @@ const EditTractor = () => {
       organizationId: activeAccount.account.organizationId,
     };
 
-    console.log(tractor)
+   
 
     if (tractor.status !== "AVAILABLE") {
       return;
     }
-    console.log("yes")
+ 
     const result = await UpdateTractor(tractor);
    
     if (typeof result === "string") {

@@ -56,7 +56,7 @@ const TrailersList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.length && data.map((row) => (
+                { data.map((row) => (
                   <TableRow
                     key={row.organizationId}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
