@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Forms/Register";
 import SignIn from "./pages/Forms/SignIn";
@@ -22,7 +27,7 @@ function App() {
     <AccountActive.Provider value={{ activeAccount, setActiveAccount }}>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/register" replace />}/>
+          <Route path="/" element={<Navigate to="/register" replace />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/pages/profile" element={<Profile />} />

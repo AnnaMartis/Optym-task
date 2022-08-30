@@ -32,36 +32,44 @@ export async function AddTrailer(trailer) {
   return result;
 }
 
-
 export async function GetTractorList(id) {
-  const result = await FetchDataGet(id, "/api/v2/tractors/all/tractors", "organizationId");
+  const result = await FetchDataGet(
+    id,
+    "/api/v2/tractors/all/tractors",
+    "organizationId"
+  );
 
   return result;
 }
 
 export async function GetTrailersList(id) {
-    const result = await FetchDataGet(id, "/api/v2/trailers/all/trailers", "organizationId");
+  const result = await FetchDataGet(
+    id,
+    "/api/v2/trailers/all/trailers",
+    "organizationId"
+  );
 
-    return result;
-  }
+  return result;
+}
 
 export async function GetDriversList(id) {
-
-  const result = await FetchDataGet(id, "/api/v2/accounts/all/drivers", "organizationId");
-    return result;
+  const result = await FetchDataGet(
+    id,
+    "/api/v2/accounts/all/drivers",
+    "organizationId"
+  );
+  return result;
 }
 
 export async function GetTractorDetails(id) {
   const result = await FetchDataGet(id, "/api/v2/tractors/asset/id", "assetId");
 
-    return result;
-
+  return result;
 }
 
 export async function UpdateTractor(tractor) {
- 
   const result = await FetchData("PUT", tractor, "/api/v2/tractors/update");
-  console.log(result)
+  console.log(result);
 
   return result;
 }

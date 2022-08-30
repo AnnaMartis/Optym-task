@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import { StyledInputField, StyledSubmitButton } from "../styles";
 
 const Form = ({ names, handlers, labels, handleSubmit, keys }) => {
- 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
       {names.map((name, ind) => (

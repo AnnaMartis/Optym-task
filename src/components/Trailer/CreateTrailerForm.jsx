@@ -26,8 +26,7 @@ const CreateTrailerForm = () => {
   const onVinChange = (e) => setVin(e.target.value);
   const onYearChange = (e) => setYear(e.target.value);
 
-
-  const keys = ["name", "make", "model", "vin", "year" ]
+  const keys = ["name", "make", "model", "vin", "year"];
   const names = [trailName, make, model, vin, year];
   const handlers = [
     onNameChange,
@@ -53,16 +52,12 @@ const CreateTrailerForm = () => {
       organizationId: activeAccount.account.organizationId,
     };
 
-   
-
     const result = await AddTrailer(trailer);
 
     if (typeof result === "string") {
       setError(result);
       return;
     }
-
-
 
     navigate("/pages/trailers/trailers");
   };
@@ -85,7 +80,7 @@ const CreateTrailerForm = () => {
             handlers={handlers}
             labels={labels}
             handleSubmit={handleSubmit}
-            keys = {keys}
+            keys={keys}
           />
         </Container>
       </Paper>

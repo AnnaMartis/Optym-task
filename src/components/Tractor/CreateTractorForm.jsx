@@ -27,7 +27,7 @@ const CreateTractorForm = () => {
   const onYearChange = (e) => setYear(e.target.value);
   const onStatusChange = (e) => setStatus(e.target.value);
 
-  const keys = ["name", "make", "model", "vin", "year","status" ]
+  const keys = ["name", "make", "model", "vin", "year", "status"];
   const names = [tracName, make, model, vin, year, status];
   const handlers = [
     onNameChange,
@@ -40,7 +40,6 @@ const CreateTractorForm = () => {
   const labels = ["Tractor Name", "Make", "Model", "Vin", "Year ", "Status"];
 
   const handleSubmit = async (event) => {
-   
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -52,14 +51,14 @@ const CreateTractorForm = () => {
       vin: data.get("vin"),
       status: data.get("status"),
       dot: activeAccount.account.dot,
-      organizationId: activeAccount.account.organizationId
+      organizationId: activeAccount.account.organizationId,
     };
-  
+
     if (tractor.status !== "AVAILABLE") {
-      setError("Tractor is not available")
+      setError("Tractor is not available");
       return;
     }
-   
+
     const result = await AddTractor(tractor);
     if (typeof result === "string") {
       setError(result);
@@ -88,7 +87,7 @@ const CreateTractorForm = () => {
             handlers={handlers}
             labels={labels}
             handleSubmit={handleSubmit}
-            keys = {keys}
+            keys={keys}
           />
         </Container>
       </Paper>

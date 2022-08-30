@@ -14,9 +14,7 @@ import { RegisterUser } from "../../api";
 import { isDataValid } from "../../config";
 
 export default function SignUpForm() {
-
   const [error, setError] = useState("");
-
 
   const navigate = useNavigate();
 
@@ -25,16 +23,11 @@ export default function SignUpForm() {
     const confirm = data.get("confirm");
 
     if (password !== confirm) {
-     
-      return
-    };
+      return;
+    }
 
     return isDataValid(user);
-
-   
-
   };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,15 +45,12 @@ export default function SignUpForm() {
       return;
     }
 
-
-
     const result = await RegisterUser(user);
 
     if (typeof result === "string") {
       setError(result);
       return;
     }
-
 
     navigate("../signin");
   };

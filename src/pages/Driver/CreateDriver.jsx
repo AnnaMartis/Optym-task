@@ -3,7 +3,7 @@ import * as React from "react";
 import Sidebar from "../../components/Bars/Sidebar";
 import Navbar from "../../components/Bars/Navbar";
 import { Box } from "@mui/material";
-import CreateDriverForm from "../../components/Driver/CreateDriverForm"
+import CreateDriverForm from "../../components/Driver/CreateDriverForm";
 
 const CreateDriver = () => {
   return (

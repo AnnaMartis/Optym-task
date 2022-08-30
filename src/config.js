@@ -21,7 +21,6 @@ export async function FetchData(method, data, api) {
 }
 
 export async function FetchDataGet(id, api, name) {
-
   const response = await fetch(url + api + `?${name}=${id}`);
 
   const json = await response.json();

@@ -13,7 +13,7 @@ export const StyledInputField = styled(TextField)({
   width: 400,
   height: 30,
   marginBottom: 35,
-  marginRight : 20
+  marginRight: 20,
 });
 
 export const StyledSubmitButton = styled(Button)({

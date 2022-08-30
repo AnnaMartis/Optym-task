@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -11,24 +11,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { AccountActive } from "../../App";
-import {GetTrailersList} from "../../api";
-
-
+import { GetTrailersList } from "../../api";
 
 const TrailersList = () => {
-
   const { activeAccount, setActiveAccount } = useContext(AccountActive);
   const [data, setData] = useState([]);
 
-  
-  
-
-  useEffect(()=>{
+  useEffect(() => {
     const organizationId = activeAccount.account.organizationId;
-    GetTrailersList(organizationId).then((result)=>{setData(result.trailers)})
-
-  }, [])
-
+    GetTrailersList(organizationId).then((result) => {
+      setData(result.trailers);
+    });
+  }, []);
 
   return (
     <Box flex={4} p={1}>
@@ -56,7 +50,7 @@ const TrailersList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                { data.map((row) => (
+                {data.map((row) => (
                   <TableRow
                     key={row.organizationId}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

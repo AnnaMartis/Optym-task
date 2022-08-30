@@ -14,9 +14,6 @@ import { UpdateUser } from "../../api";
 export const ProfileForm = () => {
   const { activeAccount, setActiveAccount } = useContext(AccountActive);
 
-
-
-
   const [error, setError] = useState("");
 
   const [phoneValue, setPhoneValue] = useState("");
@@ -27,12 +24,8 @@ export const ProfileForm = () => {
   const onChangePhone = (e) => setPhoneValue(e.target.value);
   const onChangeZoom = (e) => setZoomValue(e.target.value);
 
-
   const names = [phoneValue, zoomValue];
-  const handlers = [
-    onChangePhone,
-    onChangeZoom,
-  ];
+  const handlers = [onChangePhone, onChangeZoom];
   const labels = ["Phone", "E-mail", "Phone", "Password"];
 
   const handleSubmit = async (event) => {

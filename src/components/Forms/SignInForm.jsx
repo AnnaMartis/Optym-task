@@ -12,17 +12,14 @@ import { StyledInputField, StyledSubmitButton } from "../../styles";
 import { LoginUser } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { AccountActive } from "../../App";
-import {isDataValid} from "../../config"
-
+import { isDataValid } from "../../config";
 
 export default function SignInForm() {
-
-  const {activeAccount, setActiveAccount} = useContext(AccountActive);
+  const { activeAccount, setActiveAccount } = useContext(AccountActive);
 
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,16 +42,13 @@ export default function SignInForm() {
       return;
     }
 
-   
-    setActiveAccount(account)
+    setActiveAccount(account);
     navigate("../pages/profile");
-
-   
   };
 
   return (
     <Container component="main" maxWidth="xs">
-     {error && <Typography>{error}</Typography>}
+      {error && <Typography>{error}</Typography>}
 
       <CssBaseline />
       <Box

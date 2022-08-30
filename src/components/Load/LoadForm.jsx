@@ -11,7 +11,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-
 // const defaultData = [
 //   {
 //     originCity: "Elgin",
@@ -87,7 +86,6 @@ const LoadForm = () => {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                   
                   <TableRow
                     key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -103,7 +101,7 @@ const LoadForm = () => {
                     <TableCell align="right">{row.company}</TableCell>
                     <TableCell align="right">{row.daysToPay}</TableCell>
                     <TableCell align="right">
-                        <Link href="/register">View</Link>
+                      <Link href="/register">View</Link>
                     </TableCell>
                   </TableRow>
                 ))}

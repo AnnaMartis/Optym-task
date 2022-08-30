@@ -10,7 +10,6 @@ import { UpdateTractor } from "../../api";
 import { useSearchParams } from "react-router-dom";
 import { GetTractorDetails } from "../../api";
 
-
 const EditTractor = () => {
   const [searchParams] = useSearchParams();
   const [error, setError] = useState("");
@@ -44,7 +43,6 @@ const EditTractor = () => {
   const labels = ["Tractor Name", "Make", "Model", "Vin", "Year ", "Status"];
 
   const handleSubmit = async (event) => {
-    
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -59,14 +57,12 @@ const EditTractor = () => {
       organizationId: activeAccount.account.organizationId,
     };
 
-   
-
     if (tractor.status !== "AVAILABLE") {
       return;
     }
- 
+
     const result = await UpdateTractor(tractor);
-   
+
     if (typeof result === "string") {
       setError(result);
       return;
@@ -82,7 +78,7 @@ const EditTractor = () => {
       setModel(result.model);
       setYear(result.year);
       setStatus(result.status);
-      setVin(result.vin)
+      setVin(result.vin);
     });
   }, []);
 

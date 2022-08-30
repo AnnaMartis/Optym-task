@@ -7,15 +7,13 @@ import LoadForm from "../../components/Load/LoadForm";
 
 const Load = () => {
   return (
-    
-      <Box className="Load">
-        <Navbar />
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar />
-          <LoadForm />
-        </Stack>
-      </Box>
-   
+    <Box className="Load">
+      <Navbar />
+      <Stack direction="row" spacing={2} justifyContent="space-between">
+        <Sidebar />
+        <LoadForm />
+      </Stack>
+    </Box>
   );
 };
 
