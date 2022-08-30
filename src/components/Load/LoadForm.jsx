@@ -11,18 +11,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-// const defaultData = [
-//   {
-//     originCity: "Elgin",
-//     originState: "IL",
-//     destCity: "Jessup",
-//     destState: "PA",
-//     eqType: "Van",
-//     revenue: "3300",
-//     company: "Surge",
-//     daysToPay: 19,
-//   },
-// ];
 
 function createData(
   originCity,
