@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
@@ -8,25 +9,70 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { StyledInputField, StyledSubmitButton } from "../../styles";
-
-
+import { useNavigate } from "react-router-dom";
+import { RegisterUser } from "../../api";
+import { isDataValid } from "../../config";
 
 export default function SignUpForm() {
-  const handleSubmit = (event) => {
+
+  const [error, setError] = useState("");
+
+
+  const navigate = useNavigate();
+
+  const isDataValidAdd = (data, user) => {
+    const password = data.get("password");
+    const confirm = data.get("confirm");
+
+    if (password !== confirm) {
+     
+      return
+    };
+
+    return isDataValid(user);
+
+   
+
+  };
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
+      dot: data.get("dot"),
+      organizationName: data.get("org"),
       email: data.get("email"),
       password: data.get("password"),
-    });
+      name: data.get("name"),
+    };
+
+    if (!isDataValidAdd(data, user)) {
+      setError("Wrong Input Parametres");
+      return;
+    }
+
+
+
+    const result = await RegisterUser(user);
+
+    if (typeof result === "string") {
+      setError(result);
+      return;
+    }
+
+
+    navigate("../signin");
   };
 
   return (
-    <Container component="main" maxWidth="xs" maxHeight="xs">
+    <Container component="main" maxWidth="xs">
+      {error && <Typography>{error}</Typography>}
+
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -96,6 +142,17 @@ export default function SignUpForm() {
               />
             </Grid>
 
+            <Grid item xs={12}>
+              <StyledInputField
+                required
+                fullWidth
+                name="confirm"
+                label="Confirm"
+                type="password"
+                id="confirm"
+                autoComplete="confirm-password"
+              />
+            </Grid>
           </Grid>
           <StyledSubmitButton
             type="submit"
@@ -107,9 +164,7 @@ export default function SignUpForm() {
           </StyledSubmitButton>
           <Grid container justifyContent="flex-start">
             <Grid item>
-              <Link href="/signin" >
-                Already have an account? Sign in
-              </Link>
+              <Link href="/signin">Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </Box>

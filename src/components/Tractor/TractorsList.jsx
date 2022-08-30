@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -10,18 +10,38 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
-function createData(name, vin, year, model, status, id) {
-  return {
-    name, vin, year, model, status, id
-  };
-}
-
-const rows = [
-  createData(121, 131, 2000, 222, "AVAILABLE", 1),
-];
+import { GetTractorList } from "../../api";
+import { AccountActive } from "../../App";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const TractorsList = () => {
+  const navigate = useNavigate();
+
+  const { activeAccount, setActiveAccount } = useContext(AccountActive);
+  const [data, setData] = useState([]);
+
+  
+  useEffect(() => {
+    const organizationId = activeAccount.account.organizationId;
+    GetTractorList(organizationId).then((result) => {
+      setData(result.tractors);
+    });
+  }, []);
+
+  const handleNavigation = (id) => {
+
+    const params = {};
+    const tractorId = id;
+
+    params.tractorId = tractorId;
+  
+
+    navigate({
+      pathname: "/pages/tractors/tractors/update",
+      search: `?${createSearchParams(params)}`,
+    });
+  };
+
   return (
     <Box flex={4} p={1}>
       <Paper sx={{ minHeight: "80vh" }}>
@@ -48,21 +68,27 @@ const TractorsList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.vin}</TableCell>
-                    <TableCell align="right">{row.year}</TableCell>
-                    <TableCell align="right">{row.model}</TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
-                    <TableCell align="right">
-                      <Link href="#">Update</Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {data.length &&
+                  data.map((row) => (
+                    <TableRow
+                      key={row.tractorId}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell align="right">{row.name}</TableCell>
+                      <TableCell align="right">{row.vin}</TableCell>
+                      <TableCell align="right">{row.year}</TableCell>
+                      <TableCell align="right">{row.model}</TableCell>
+                      <TableCell align="right">{row.status}</TableCell>
+                      <TableCell align="right">
+                        <button
+                          onClick={()=>handleNavigation(row.id)}
+                          
+                        >
+                          Update
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

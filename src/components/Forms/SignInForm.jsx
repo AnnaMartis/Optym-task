@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
@@ -8,20 +9,53 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { StyledInputField, StyledSubmitButton } from "../../styles";
+import { LoginUser } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { AccountActive } from "../../App";
+import {isDataValid} from "../../config"
 
 
 export default function SignInForm() {
-  const handleSubmit = (event) => {
+
+  const {activeAccount, setActiveAccount} = useContext(AccountActive);
+
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+      dot: data.get("dot"),
+    };
+
+    if (!isDataValid(user)) {
+      setError("Wrong Input Parametres");
+      return;
+    }
+
+    const account = await LoginUser(user);
+
+    if (typeof account === "string") {
+      setError(account);
+      return;
+    }
+
+   
+    setActiveAccount(account)
+    navigate("../pages/profile");
+
+   
   };
 
   return (
     <Container component="main" maxWidth="xs">
+     {error && <Typography>{error}</Typography>}
+
       <CssBaseline />
       <Box
         sx={{
@@ -38,6 +72,16 @@ export default function SignInForm() {
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <StyledInputField
+            margin="normal"
+            required
+            fullWidth
+            id="dot"
+            label="DOT"
+            name="dot"
+            autoComplete="dot"
+            autoFocus
+          />
           <StyledInputField
             margin="normal"
             required

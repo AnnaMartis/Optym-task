@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Paper } from "@mui/material";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -10,21 +10,26 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { AccountActive } from "../../App";
+import {GetTrailersList} from "../../api";
 
-function createData(name, vin, year, model, status, id) {
-  return {
-    name,
-    vin,
-    year,
-    model,
-    status,
-    id,
-  };
-}
 
-const rows = [createData(121, 131, 2000, 222, "AVAILABLE", 1)];
 
 const TrailersList = () => {
+
+  const { activeAccount, setActiveAccount } = useContext(AccountActive);
+  const [data, setData] = useState([]);
+
+  
+  
+
+  useEffect(()=>{
+    const organizationId = activeAccount.account.organizationId;
+    GetTrailersList(organizationId).then((result)=>{setData(result.trailers)})
+
+  }, [])
+
+
   return (
     <Box flex={4} p={1}>
       <Paper sx={{ minHeight: "80vh" }}>
@@ -51,9 +56,9 @@ const TrailersList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {data.length && data.map((row) => (
                   <TableRow
-                    key={row.id}
+                    key={row.organizationId}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="right">{row.name}</TableCell>

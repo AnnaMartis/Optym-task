@@ -11,7 +11,9 @@ export const StyledInnerHeader = styled("h2")({
 
 export const StyledInputField = styled(TextField)({
   width: 400,
-  marginBottom: 20,
+  height: 30,
+  marginBottom: 35,
+  marginRight : 20
 });
 
 export const StyledSubmitButton = styled(Button)({

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -10,22 +10,23 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
-function createData(name, mail, phone, status, id) {
-  return {
-    name,
-    mail,
-    phone,
-    status,
-    id,
-  };
-}
-
-const rows = [
-  createData("Anna Smith", "anna@gmail.com", "0552", "AVAILABLE", 1),
-];
+import { GetDriversList } from "../../api";
+import { AccountActive } from "../../App";
 
 const DriversList = () => {
+  const { activeAccount, setActiveAccount } = useContext(AccountActive);
+  const [data, setData] = useState([]);
+
+ 
+
+  useEffect(() => {
+    const organizationId = activeAccount.account.organizationId;
+    GetDriversList(organizationId).then((result) => {
+      setData(result.drivers);
+   
+    });
+  }, []);
+
   return (
     <Box flex={4} p={1}>
       <Paper sx={{ minHeight: "80vh" }}>
@@ -52,23 +53,24 @@ const DriversList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.mail}</TableCell>
-                    <TableCell align="right">{row.phone}</TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
-                    <TableCell align="right">
-                      <Link href="#">Update</Link>
-                    </TableCell>
-                    <TableCell align="right">
-                      <Link href="#">View</Link>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {data.length &&
+                  data.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell align="right">{row.name}</TableCell>
+                      <TableCell align="right">{row.mail}</TableCell>
+                      <TableCell align="right">{row.phone}</TableCell>
+                      <TableCell align="right">{row.status}</TableCell>
+                      <TableCell align="right">
+                        <Link href="#">Update</Link>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Link href="#">View</Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
